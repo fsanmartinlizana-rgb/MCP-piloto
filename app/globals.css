@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+@theme {
+  --color-crema: #fbfaf8;
+  --color-papel: #ffffff;
+  --color-tinta: #16181d;
+  --color-grafito: #5c6169;
+  --color-borde: #e5e2dc;
+  --color-verde: #1f5e46;
+  --color-verde-claro: #eef4f1;
+  --color-ambar: #8a6d1f;
+  --color-ambar-claro: #fbf4e2;
+
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-crema);
+  color: var(--color-tinta);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Foco visible en todo control interactivo: el formulario tiene que poder
+   llenarse completo con teclado. */
+:focus-visible {
+  outline: 2px solid var(--color-verde);
+  outline-offset: 2px;
+}
