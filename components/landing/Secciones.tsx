@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { DemoReal } from "@/components/landing/DemoReal";
 
 /**
  * Secciones estaticas de la landing.
@@ -105,6 +106,31 @@ export function ComoFunciona() {
             </li>
           ))}
         </ol>
+
+        <div className="mt-16 border-t border-borde pt-12">
+          <h3 className="text-xl font-semibold tracking-tight">
+            Así se ve por dentro
+          </h3>
+          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-grafito">
+            Un ejemplo de cómo aparece tu tienda en la conversación. La tienda y
+            los productos son ficticios; el flujo es el mismo que ve tu cliente.
+          </p>
+
+          <div className="mt-8 grid gap-10 lg:grid-cols-[minmax(0,1fr)_17rem] lg:gap-12">
+            <DemoReal />
+
+            <aside className="self-start rounded-xl border border-borde bg-crema p-5 lg:mt-14">
+              <p className="text-sm leading-relaxed text-grafito">
+                Fíjate en un detalle: el cliente nunca escribió el nombre de un
+                producto. Dijo qué quería lograr, y el asistente tradujo eso a
+                lo que hay en el estante de la tienda.
+              </p>
+              <p className="mt-3 text-sm leading-relaxed text-grafito">
+                Eso es lo que no puede hacer un buscador con palabras clave.
+              </p>
+            </aside>
+          </div>
+        </div>
       </div>
     </section>
   );
