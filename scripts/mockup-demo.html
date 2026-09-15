@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="es-CL">
+<head>
+<meta charset="utf-8">
+<title>Mockup demo</title>
+<style>
+  /* Maqueta de la demo con una tienda ficticia (Almacén Rivas).
+     Se renderiza a 1100x720 por cuadro y se captura con Playwright.
+     Nada acá usa marcas reales: ni la tienda, ni los productos, ni el
+     packaging, que va dibujado en SVG y no fotografiado. */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: #191919;
+    color: #e8e6e1;
+  }
+
+  .cuadro {
+    width: 1100px;
+    height: 720px;
+    padding: 34px 40px;
+    background: #191919;
+    overflow: hidden;
+  }
+
+  /* --- Mensajes ---------------------------------------------------------- */
+
+  .del-usuario {
+    max-width: 640px;
+    margin-left: auto;
+    background: #2a2a2c;
+    border-radius: 14px;
+    padding: 16px 20px;
+    font-size: 19px;
+    line-height: 1.45;
+  }
+
+  .herramienta {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: #8d8a84;
+    font-size: 16px;
+  }
+  .herramienta .punto {
+    width: 18px; height: 18px; border-radius: 5px;
+    background: #6b4a3a; color: #f0e4dc;
+    font-size: 11px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .respuesta {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 20px;
+    line-height: 1.55;
+    color: #e8e6e1;
+  }
+  .respuesta strong { font-weight: 700; }
+  .respuesta p + p { margin-top: 15px; }
+
+  .pensando { display: flex; align-items: center; gap: 10px; color: #8d8a84; font-size: 17px; }
+  .chispa { width: 18px; height: 18px; }
+
+  /* --- Widget de la tienda ------------------------------------------------ */
+
+  .widget {
+    background: #232325;
+    border-radius: 12px;
+    padding: 22px 24px;
+  }
+
+  .widget-cabecera {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .widget h2 { font-size: 25px; font-weight: 700; letter-spacing: -.01em; }
+  .widget-cabecera p {
+    margin-top: 7px;
+    max-width: 560px;
+    font-size: 14.5px;
+    line-height: 1.45;
+    color: #a8a49d;
+  }
+
+  /* Marca ficticia, dibujada acá mismo: no es el logo de nadie. */
+  .marca-tienda {
+    flex-shrink: 0;
+    width: 168px;
+    height: 74px;
+    border-radius: 8px;
+    background: #7d4a35;
+    color: #fdf6f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    text-align: center;
+  }
+  .marca-tienda .rotulo { font-size: 10px; letter-spacing: .22em; text-transform: uppercase; opacity: .82; }
+  .marca-tienda .nombre { font-family: Georgia, serif; font-size: 24px; font-weight: 700; letter-spacing: .02em; }
+
+  .productos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 17px;
+    margin-top: 20px;
+  }
+
+  .producto {
+    background: #1c1c1e;
+    border: 1px solid #2e2e31;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .lamina { position: relative; height: 168px; background: #ede4d8; }
+  .lamina svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+  .esquina-carro {
+    position: absolute;
+    top: 0; right: 0;
+    width: 88px; height: 88px;
+    background: linear-gradient(225deg, #7a5a1e 0 52%, transparent 52%);
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding: 12px 12px 0 0;
+  }
+  .esquina-carro svg { position: static; width: 26px; height: 26px; }
+
+  .ficha { padding: 14px 15px 16px; display: flex; flex-direction: column; gap: 7px; flex: 1; }
+  .rubro { font-size: 11px; letter-spacing: .13em; text-transform: uppercase; color: #8d8a84; }
+  .titulo { font-size: 16.5px; font-weight: 650; line-height: 1.25; }
+  .detalle { font-size: 13.5px; line-height: 1.4; color: #a8a49d; }
+  .precio { font-size: 17px; font-weight: 700; margin-top: 2px; }
+
+  .controles { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 8px; }
+  .cantidad {
+    display: flex; align-items: center; gap: 13px;
+    border: 1px solid #38383c; border-radius: 999px;
+    padding: 5px 13px; font-size: 14.5px; color: #cfccc6;
+  }
+  .accion {
+    border: 0; border-radius: 7px;
+    padding: 8px 17px;
+    font: inherit; font-size: 14px; font-weight: 600;
+    background: #46464a; color: #e8e6e1;
+  }
+  .accion.quitar { background: #8f3f34; color: #fdeeea; }
+
+  .apilado { display: flex; flex-direction: column; }
+</style>
+</head>
+<body>
+
+<!-- ============ Cuadro 1: la pregunta ============ -->
+<div class="cuadro" id="cuadro-1" style="display:flex;flex-direction:column;gap:38px;justify-content:center">
+  <div class="del-usuario">
+    Almacén Rivas, tengo un carmenère y quiero impresionar a mi pareja.
+    ¿Qué pasta o pack le queda bien?
+  </div>
+  <div class="pensando">
+    <svg class="chispa" viewBox="0 0 24 24" fill="#c2705a" aria-hidden="true">
+      <path d="M12 1.6l1.7 6.1 6.1 1.7-6.1 1.7L12 17.2l-1.7-6.1-6.1-1.7 6.1-1.7z"/>
+    </svg>
+    <span>Buscando en el catálogo…</span>
+  </div>
+</div>
+
+<!-- ============ Cuadro 2: la respuesta con el selector ============ -->
+<div class="cuadro apilado" id="cuadro-2" style="gap:20px">
+  <div class="herramienta">
+    <span class="punto">A</span>
+    <span>Herramientas cargadas, usó la integración de Almacén Rivas</span>
+  </div>
+
+  <div class="respuesta">
+    <p>
+      Buena excusa el carmenère. Es un tinto con cuerpo, pimiento y fruta negra:
+      pide un plato concentrado, no uno herbáceo. En el catálogo de Almacén Rivas
+      eso significa <strong>pesto rosso</strong> (tomate seco, umami maduro) antes
+      que el genovese, y una pasta que aguante: cinta ancha o tubo estriado.
+    </p>
+    <p>Con eso en mente te dejo tres caminos del estante:</p>
+  </div>
+
+  <div class="herramienta" style="font-size:15px">
+    <span class="punto">A</span>
+    <span>Almacén Rivas · mostrar_productos</span>
+  </div>
+
+  <div class="widget">
+    <div class="widget-cabecera">
+      <div>
+        <h2>Elige lo que va a tu mesa</h2>
+        <p>
+          Agrega lo que te guste. Si tienes dudas, pregunta en el chat. Cuando
+          quieras comprar, escríbelo como te salga: «Finaliza mi compra», «Listo,
+          quiero pagar» o algo similar.
+        </p>
+      </div>
+      <div class="marca-tienda">
+        <span class="rotulo">Almacén</span>
+        <span class="nombre">Rivas</span>
+      </div>
+    </div>
+
+    <div class="productos" id="productos-2"></div>
+  </div>
+</div>
+
+<!-- ============ Cuadro 3: producto agregado ============ -->
+<div class="cuadro apilado" id="cuadro-3" style="gap:18px;justify-content:center">
+  <div class="widget">
+    <div class="widget-cabecera">
+      <div>
+        <h2>Elige lo que va a tu mesa</h2>
+        <p>
+          Agrega lo que te guste. Si tienes dudas, pregunta en el chat. Cuando
+          quieras comprar, escríbelo como te salga: «Finaliza mi compra», «Listo,
+          quiero pagar» o algo similar.
+        </p>
+      </div>
+      <div class="marca-tienda">
+        <span class="rotulo">Almacén</span>
+        <span class="nombre">Rivas</span>
+      </div>
+    </div>
+
+    <div class="productos" id="productos-3"></div>
+  </div>
+</div>
+
+<script>
+  // Packaging dibujado, no fotografiado: así ninguna marca real aparece en la
+  // demo. Cada producto lleva su propia paleta para que las tres láminas se
+  // distingan sin parecer la misma imagen repetida.
+  function lamina(fondo, caja, tapa, franja, piezas) {
+    return `
+      <svg viewBox="0 0 320 168" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <rect width="320" height="168" fill="${fondo}"/>
+        <ellipse cx="160" cy="150" rx="118" ry="13" fill="rgba(0,0,0,.07)"/>
+        ${piezas}
+        <rect x="112" y="40" width="96" height="104" rx="5" fill="${caja}"/>
+        <rect x="112" y="40" width="96" height="26" rx="5" fill="${tapa}"/>
+        <rect x="124" y="80" width="72" height="7" rx="3.5" fill="${franja}"/>
+        <rect x="124" y="94" width="50" height="5" rx="2.5" fill="${franja}" opacity=".62"/>
+        <rect x="124" y="106" width="60" height="5" rx="2.5" fill="${franja}" opacity=".4"/>
+      </svg>`;
+  }
+
+  var espigas = `
+    <path d="M52 146 L52 92" stroke="#b79a63" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M52 100 q-13 -9 -15 -22 q14 2 15 22z" fill="#c9ab72"/>
+    <path d="M52 100 q13 -9 15 -22 q-14 2 -15 22z" fill="#c9ab72"/>
+    <path d="M52 118 q-13 -9 -15 -22 q14 2 15 22z" fill="#c9ab72"/>
+    <path d="M52 118 q13 -9 15 -22 q-14 2 -15 22z" fill="#c9ab72"/>`;
+
+  var hojas = `
+    <path d="M268 146 L268 104" stroke="#6f8d5a" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M268 116 q-21 -5 -26 -25 q22 1 26 25z" fill="#7d9c63"/>
+    <path d="M268 126 q21 -5 26 -25 q-22 1 -26 25z" fill="#8caa70"/>`;
+
+  var tarros = `
+    <rect x="60" y="96" width="34" height="48" rx="4" fill="#5d6b4a"/>
+    <rect x="60" y="96" width="34" height="11" rx="4" fill="#47533a"/>
+    <rect x="66" y="116" width="22" height="5" rx="2.5" fill="#cfd8bf" opacity=".8"/>
+    <rect x="232" y="104" width="30" height="40" rx="4" fill="#8a4b3c"/>
+    <rect x="232" y="104" width="30" height="10" rx="4" fill="#6f3b2f"/>`;
+
+  var PRODUCTOS = [
+    {
+      rubro: "Pack",
+      titulo: "Mesa Larga",
+      detalle: "Tres pastas, dos pestos, untables y aceite de oliva. Para quien cocina…",
+      precio: "$44.900",
+      lamina: lamina("#ece2d4", "#7a4b38", "#5f3a2b", "#e8d9c4", espigas + tarros),
+    },
+    {
+      rubro: "Pack",
+      titulo: "Domingo",
+      detalle: "Dos formatos —cinta ancha y tubo estriado— más pesto rosso. Sirve…",
+      precio: "$29.900",
+      lamina: lamina("#e6dfd2", "#3f5442", "#2f4033", "#dbe4d5", hojas + tarros),
+    },
+    {
+      rubro: "Pastas",
+      titulo: "Tagliatelle al huevo, 500 g",
+      detalle: "Cinta ancha, la forma clásica del ragú, de los hongos y de la mantequilla…",
+      precio: "$5.900",
+      lamina: lamina("#efe9df", "#2f4a63", "#22394d", "#d9e5ef", hojas),
+      enCarro: true,
+    },
+  ];
+
+  var CARRO = `
+    <svg viewBox="0 0 24 24" fill="none" stroke="#fdf3dd" stroke-width="1.9"
+         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="9" cy="20" r="1.4" fill="#fdf3dd"/>
+      <circle cx="18" cy="20" r="1.4" fill="#fdf3dd"/>
+      <path d="M2 3h2.2l2.4 12h12.1l2.1-8.4H6"/>
+    </svg>`;
+
+  function tarjeta(producto, marcado) {
+    var enCarro = marcado && producto.enCarro;
+    return `
+      <article class="producto">
+        <div class="lamina">
+          ${producto.lamina}
+          ${enCarro ? `<div class="esquina-carro">${CARRO}</div>` : ""}
+        </div>
+        <div class="ficha">
+          <span class="rubro">${producto.rubro}</span>
+          <h3 class="titulo">${producto.titulo}</h3>
+          <p class="detalle">${producto.detalle}</p>
+          <span class="precio">${producto.precio}</span>
+          <div class="controles">
+            <span class="cantidad"><span>−</span><span>1</span><span>+</span></span>
+            <button class="accion ${enCarro ? "quitar" : ""}" type="button">
+              ${enCarro ? "Quitar" : "Agregar"}
+            </button>
+          </div>
+        </div>
+      </article>`;
+  }
+
+  document.getElementById("productos-2").innerHTML =
+    PRODUCTOS.map(function (p) { return tarjeta(p, false); }).join("");
+  document.getElementById("productos-3").innerHTML =
+    PRODUCTOS.map(function (p) { return tarjeta(p, true); }).join("");
+</script>
+</body>
+</html>
