@@ -23,7 +23,7 @@ export default function Inicio() {
               Inscribe tu tienda
             </h2>
             <p className="mt-3 leading-relaxed text-grafito">
-              Nos tomamos unos dias en revisar tu catalogo y avisarte. No hay
+              Nos tomamos unos días en revisar tu catálogo y avisarte. No hay
               nada que instalar ni claves que entregar.
             </p>
             <FormularioInscripcion />

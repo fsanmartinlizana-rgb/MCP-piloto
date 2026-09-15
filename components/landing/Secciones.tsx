@@ -33,14 +33,14 @@ export function Hero() {
       </p>
 
       <h1 className="max-w-3xl text-4xl leading-[1.1] font-semibold tracking-tight text-balance sm:text-5xl">
-        Que tu tienda aparezca cuando alguien le pregunta a ChatGPT o Claude que
+        Que tu tienda aparezca cuando alguien le pregunta a ChatGPT o Claude qué
         comprar
       </h1>
 
       <p className="mt-6 max-w-2xl text-lg leading-relaxed text-grafito">
-        Conectas tu catalogo una vez. Cuando una persona busca algo que tu
+        Conectas tu catálogo una vez. Cuando una persona busca algo que tú
         vendes, el asistente le recomienda tus productos y la manda directo a la
-        pagina del producto en tu sitio. La venta se cierra donde siempre: en tu
+        página del producto en tu sitio. La venta se cierra donde siempre: en tu
         tienda.
       </p>
 
@@ -70,19 +70,19 @@ export function Hero() {
 
 const PASOS = [
   {
-    titulo: "Conectas tu catalogo",
+    titulo: "Conectas tu catálogo",
     texto:
-      "Nos das la direccion de tu tienda y listo. Leemos el catalogo que ya es publico en tu sitio: nombre, descripcion, precio, stock, imagenes y el link de cada producto. No instalas nada ni nos entregas claves.",
+      "Nos das la dirección de tu tienda y listo. Leemos el catálogo que ya es público en tu sitio: nombre, descripción, precio, stock, imágenes y el link de cada producto. No instalas nada ni nos entregas claves.",
   },
   {
     titulo: "Tu tienda queda disponible dentro de los asistentes",
     texto:
-      "Cuando alguien le pide a ChatGPT o Claude una recomendacion de algo que tu vendes, tus productos entran en la respuesta con su precio y su disponibilidad al dia.",
+      "Cuando alguien le pide a ChatGPT o Claude una recomendación de algo que tú vendes, tus productos entran en la respuesta con su precio y su disponibilidad al día.",
   },
   {
     titulo: "El cliente llega a tu carrito",
     texto:
-      "El asistente lo lleva directo a la pagina del producto en tu tienda. De ahi en adelante todo pasa donde siempre paso: tu sitio, tu carrito, tu checkout.",
+      "El asistente lo lleva directo a la página del producto en tu tienda. De ahí en adelante todo pasa donde siempre pasó: tu sitio, tu carrito, tu checkout.",
   },
 ];
 
@@ -91,7 +91,7 @@ export function ComoFunciona() {
     <section id="como-funciona" className="border-y border-borde bg-papel">
       <div className="mx-auto max-w-5xl px-5 py-16 sm:py-20">
         <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-          Como funciona
+          Cómo funciona
         </h2>
 
         <ol className="mt-10 grid gap-8 sm:grid-cols-3 sm:gap-7">
@@ -119,17 +119,17 @@ const NO_HACEMOS = [
   {
     titulo: "No tocamos los datos de tus clientes",
     texto:
-      "No accedemos a tus pedidos, ni a los correos de tus compradores, ni a nada que este detras de un login. Solo leemos el catalogo que cualquiera puede ver entrando a tu sitio.",
+      "No accedemos a tus pedidos, ni a los correos de tus compradores, ni a nada que esté detrás de un login. Solo leemos el catálogo que cualquiera puede ver entrando a tu sitio.",
   },
   {
     titulo: "No te pedimos claves ni accesos",
     texto:
-      "No necesitamos usuario de administrador, ni API keys, ni que instales una app en tu tienda. Basta con la direccion de tu sitio.",
+      "No necesitamos usuario de administrador, ni API keys, ni que instales una app en tu tienda. Basta con la dirección de tu sitio.",
   },
   {
     titulo: "No te amarramos",
     texto:
-      "Puedes pedir la baja cuando quieras y sacamos tu catalogo del indice en un maximo de 72 horas. Sin llamadas de retencion.",
+      "Puedes pedir la baja cuando quieras y sacamos tu catálogo del índice en un máximo de 72 horas. Sin llamadas de retención.",
   },
 ];
 
@@ -137,11 +137,11 @@ export function QueNoHacemos() {
   return (
     <section id="que-no-hacemos" className="mx-auto max-w-5xl px-5 py-16 sm:py-20">
       <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-        Que <span className="underline decoration-verde decoration-2 underline-offset-4">no</span>{" "}
+        Qué <span className="underline decoration-verde decoration-2 underline-offset-4">no</span>{" "}
         hacemos
       </h2>
       <p className="mt-3 max-w-2xl text-grafito">
-        Antes de que preguntes, porque es lo primero que preguntaria cualquiera.
+        Antes de que preguntes, porque es lo primero que preguntaría cualquiera.
       </p>
 
       <div className="mt-10 grid gap-px overflow-hidden rounded-xl border border-borde bg-borde sm:grid-cols-2">
@@ -158,24 +158,24 @@ export function QueNoHacemos() {
 
 const PREGUNTAS = [
   {
-    pregunta: "¿Cuanto cuesta?",
+    pregunta: "¿Cuánto cuesta?",
     respuesta:
-      "Nada durante la fase de piloto. El piloto no tiene fecha de termino definida. Si en algun momento cambian las condiciones comerciales, te avisamos con al menos 60 dias de anticipacion antes de que aplique cualquier cobro.",
+      "Nada durante la fase de piloto. El piloto no tiene fecha de término definida. Si en algún momento cambian las condiciones comerciales, te avisamos con al menos 60 días de anticipación antes de que aplique cualquier cobro.",
   },
   {
-    pregunta: "¿Que datos toman de mi tienda?",
+    pregunta: "¿Qué datos toman de mi tienda?",
     respuesta:
-      "Solo catalogo publico: nombre del producto, descripcion, precio, disponibilidad, imagen y el link. Lo mismo que ve cualquier persona que entra a tu sitio. Nada de datos de clientes, pedidos ni medios de pago.",
+      "Solo catálogo público: nombre del producto, descripción, precio, disponibilidad, imagen y el link. Lo mismo que ve cualquier persona que entra a tu sitio. Nada de datos de clientes, pedidos ni medios de pago.",
   },
   {
     pregunta: "¿Puedo salirme?",
     respuesta:
-      "Si, cuando quieras y sin explicar por que. Nos escribes y sacamos tu catalogo del indice en un maximo de 72 horas.",
+      "Sí, cuando quieras y sin explicar por qué. Nos escribes y sacamos tu catálogo del índice en un máximo de 72 horas.",
   },
   {
-    pregunta: "¿Que pasa si cambio mis precios?",
+    pregunta: "¿Qué pasa si cambio mis precios?",
     respuesta:
-      "Revisamos tu catalogo cada 24 horas, asi que los cambios de precio y stock se reflejan solos. Si sacas un producto de tu tienda, dejamos de recomendarlo.",
+      "Revisamos tu catálogo cada 24 horas, así que los cambios de precio y stock se reflejan solos. Si sacas un producto de tu tienda, dejamos de recomendarlo.",
   },
 ];
 
@@ -205,7 +205,7 @@ export function PiePagina() {
         <span>Dolfs · Piloto abierto para ecommerce chileno</span>
         <nav className="flex gap-5">
           <Link href="/terminos" className="underline underline-offset-4 hover:text-tinta">
-            Terminos del piloto
+            Términos del piloto
           </Link>
           <a href="mailto:contacto@dolfs.cl" className="underline underline-offset-4 hover:text-tinta">
             contacto@dolfs.cl

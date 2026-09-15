@@ -33,8 +33,8 @@ export default async function ListaEspera() {
       <h1 className="text-xl font-semibold tracking-tight">Lista de espera</h1>
       <p className="mt-2 max-w-2xl text-sm text-grafito">
         Comercios cuya plataforma queda fuera del alcance del piloto. No
-        consumen cupo de la cohorte fundadora: el numero de inscripcion se les
-        asigna recien cuando entran. El resync diario los vuelve a revisar, asi
+        consumen cupo de la cohorte fundadora: el número de inscripción se les
+        asigna recién cuando entran. El resync diario los vuelve a revisar, así
         que si migran a una plataforma soportada entran solos.
       </p>
 
@@ -87,7 +87,7 @@ export default async function ListaEspera() {
                       </a>
                       <div className="text-xs text-grafito">{comercio.contacto_telefono}</div>
                       {comercio.quiere_reunion && (
-                        <div className="mt-1 text-xs font-medium text-verde">Pidio reunion</div>
+                        <div className="mt-1 text-xs font-medium text-verde">Pidió reunión</div>
                       )}
                     </td>
                     <td className="px-4 py-3 text-grafito">
@@ -96,11 +96,11 @@ export default async function ListaEspera() {
                         →{" "}
                         {comercio.plataforma_detectada
                           ? ETIQUETAS_PLATAFORMA[comercio.plataforma_detectada as Plataforma]
-                          : "sin detectar aun"}
+                          : "sin detectar aún"}
                       </div>
                       {creiaEstarDentro && (
                         <div className="mt-1 text-xs text-ambar">
-                          Creia estar dentro del alcance
+                          Creía estar dentro del alcance
                         </div>
                       )}
                     </td>

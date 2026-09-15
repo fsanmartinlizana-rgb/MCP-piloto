@@ -62,12 +62,12 @@ export default async function PanelComercios() {
         <Metrica etiqueta="Productos" valor={totales.productos.toLocaleString("es-CL")} />
         <Metrica etiqueta="Handoffs" valor={totales.handoffs.toLocaleString("es-CL")} />
         <Metrica etiqueta="Clics" valor={totales.clics.toLocaleString("es-CL")} />
-        <Metrica etiqueta="Piden reunion" valor={totales.reuniones} />
+        <Metrica etiqueta="Piden reunión" valor={totales.reuniones} />
       </dl>
 
       {comercios.length === 0 ? (
         <div className="mt-6">
-          <Vacio>Todavia no hay comercios inscritos.</Vacio>
+          <Vacio>Todavía no hay comercios inscritos.</Vacio>
         </div>
       ) : (
         <div className="mt-6 overflow-x-auto rounded-xl border border-borde bg-papel">
@@ -80,7 +80,7 @@ export default async function PanelComercios() {
                 <th className="px-4 py-3 font-medium">Plataforma</th>
                 <th className="px-4 py-3 text-right font-medium">Productos</th>
                 <th className="px-4 py-3 text-right font-medium">Handoffs</th>
-                <th className="px-4 py-3 font-medium">Ultima sync</th>
+                <th className="px-4 py-3 font-medium">Última sync</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-borde">
@@ -122,9 +122,9 @@ export default async function PanelComercios() {
                       comercio.plataforma_detectada !== comercio.plataforma_declarada && (
                         <div
                           className="mt-0.5 text-xs text-ambar"
-                          title="El comercio declaro otra cosa; manda lo detectado"
+                          title="El comercio declaró otra cosa; manda lo detectado"
                         >
-                          declaro:{" "}
+                          declaró:{" "}
                           {ETIQUETAS_PLATAFORMA[comercio.plataforma_declarada as Plataforma]}
                         </div>
                       )}

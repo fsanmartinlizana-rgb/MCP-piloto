@@ -78,7 +78,7 @@ export default async function FichaComercio({
 
       {comercio.ultimo_error_ingesta && (
         <p className="mt-4 rounded-lg border border-ambar bg-ambar-claro px-4 py-3 text-sm text-ambar">
-          <strong className="font-semibold">Ultimo error de ingesta:</strong>{" "}
+          <strong className="font-semibold">Último error de ingesta:</strong>{" "}
           {comercio.ultimo_error_ingesta}
         </p>
       )}
@@ -99,23 +99,23 @@ export default async function FichaComercio({
               {comercio.contacto_email}
             </a>
           </Dato>
-          <Dato etiqueta="Telefono">{comercio.contacto_telefono}</Dato>
-          <Dato etiqueta="Categoria">{comercio.categoria_productos}</Dato>
+          <Dato etiqueta="Teléfono">{comercio.contacto_telefono}</Dato>
+          <Dato etiqueta="Categoría">{comercio.categoria_productos}</Dato>
           <Dato etiqueta="Plataforma declarada">
             {ETIQUETAS_PLATAFORMA[comercio.plataforma_declarada as Plataforma]}
           </Dato>
           <Dato etiqueta="Plataforma detectada">
             {comercio.plataforma_detectada
               ? ETIQUETAS_PLATAFORMA[comercio.plataforma_detectada as Plataforma]
-              : "sin detectar aun"}
+              : "sin detectar aún"}
           </Dato>
-          <Dato etiqueta="Reunion de 15 min">{comercio.quiere_reunion ? "si" : "no"}</Dato>
+          <Dato etiqueta="Reunión de 15 min">{comercio.quiere_reunion ? "sí" : "no"}</Dato>
           <Dato etiqueta="Referido por">{comercio.referido_por ?? "—"}</Dato>
         </Tarjeta>
 
         <Tarjeta titulo="Consentimiento">
           <Dato etiqueta="Aceptado el">{fecha(comercio.consentimiento_aceptado_en)}</Dato>
-          <Dato etiqueta="Version de terminos">
+          <Dato etiqueta="Versión de términos">
             <code className="font-mono text-xs">{comercio.version_terminos}</code>
           </Dato>
           <Dato etiqueta="IP de origen">
@@ -128,11 +128,11 @@ export default async function FichaComercio({
 
         <Tarjeta titulo="Ingesta">
           <Dato etiqueta="Productos activos">{Number(comercio.productos_activos ?? 0)}</Dato>
-          <Dato etiqueta="Productos historicos">{Number(comercio.productos_totales ?? 0)}</Dato>
+          <Dato etiqueta="Productos históricos">{Number(comercio.productos_totales ?? 0)}</Dato>
           <Dato etiqueta="Handoffs">
             {Number(comercio.handoffs_totales ?? 0)} ({Number(comercio.handoffs_clics ?? 0)} clics)
           </Dato>
-          <Dato etiqueta="Ultima sincronizacion">{fecha(comercio.ultima_sincronizacion_en)}</Dato>
+          <Dato etiqueta="Última sincronización">{fecha(comercio.ultima_sincronizacion_en)}</Dato>
           <Dato etiqueta="Inscrito el">{fecha(comercio.creado_en)}</Dato>
 
           {(trabajosRes.data ?? []).length > 0 && (
@@ -154,13 +154,13 @@ export default async function FichaComercio({
       <section className="mt-10">
         <h2 className="text-base font-semibold tracking-tight">Log de ingesta</h2>
         <p className="mt-1 text-sm text-grafito">
-          Lo mas reciente primero. Aca esta la respuesta a por que esta tienda
-          indexo o no.
+          Lo más reciente primero. Acá está la respuesta a por qué esta tienda
+          indexó o no.
         </p>
 
         {(logsRes.data ?? []).length === 0 ? (
           <div className="mt-4">
-            <Vacio>Todavia no hay registros de ingesta para este comercio.</Vacio>
+            <Vacio>Todavía no hay registros de ingesta para este comercio.</Vacio>
           </div>
         ) : (
           <ol className="mt-4 divide-y divide-borde overflow-hidden rounded-xl border border-borde bg-papel">

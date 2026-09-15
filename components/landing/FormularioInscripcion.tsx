@@ -72,11 +72,11 @@ export function FormularioInscripcion() {
       }
 
       setErrores(datos.campos ?? {});
-      setErrorGeneral(datos.error ?? "No pudimos enviar tu inscripcion.");
+      setErrorGeneral(datos.error ?? "No pudimos enviar tu inscripción.");
       setPermitirReintento(Boolean(datos.permitir_reintento));
       setEstado("editando");
     } catch {
-      setErrorGeneral("Hubo un problema de conexion. Intenta de nuevo.");
+      setErrorGeneral("Hubo un problema de conexión. Intenta de nuevo.");
       setEstado("editando");
     }
   }
@@ -95,7 +95,7 @@ export function FormularioInscripcion() {
           {errorGeneral}
           {permitirReintento && (
             <span className="mt-1 block font-medium">
-              Si la direccion esta correcta, presiona enviar otra vez y seguimos igual.
+              Si la dirección está correcta, presiona enviar otra vez y seguimos igual.
             </span>
           )}
         </p>
@@ -113,7 +113,7 @@ export function FormularioInscripcion() {
       <Campo
         id={`${idFormulario}-url`}
         name="url_tienda"
-        etiqueta="Direccion de tu tienda"
+        etiqueta="Dirección de tu tienda"
         ayuda="Por ejemplo: mitienda.cl"
         inputMode="url"
         autoComplete="url"
@@ -125,8 +125,8 @@ export function FormularioInscripcion() {
       <Seleccion
         id={`${idFormulario}-plataforma`}
         name="plataforma"
-        etiqueta="¿En que plataforma esta tu tienda?"
-        ayuda="Si no estas seguro, elige la que mas se parezca: lo verificamos nosotros."
+        etiqueta="¿En qué plataforma está tu tienda?"
+        ayuda="Si no estás seguro, elige la que más se parezca: lo verificamos nosotros."
         errores={errores.plataforma}
         opciones={PLATAFORMAS.map((valor) => ({
           valor,
@@ -147,7 +147,7 @@ export function FormularioInscripcion() {
           id={`${idFormulario}-cargo`}
           name="contacto_cargo"
           etiqueta="Tu cargo"
-          placeholder="Duena, encargado de ecommerce..."
+          placeholder="Dueña, encargado de ecommerce..."
           autoComplete="organization-title"
           errores={errores.contacto_cargo}
           required
@@ -168,7 +168,7 @@ export function FormularioInscripcion() {
         <Campo
           id={`${idFormulario}-telefono`}
           name="contacto_telefono"
-          etiqueta="Telefono"
+          etiqueta="Teléfono"
           type="tel"
           inputMode="tel"
           placeholder="+56 9 1234 5678"
@@ -181,7 +181,7 @@ export function FormularioInscripcion() {
       <Seleccion
         id={`${idFormulario}-categoria`}
         name="categoria_productos"
-        etiqueta="¿Que vendes?"
+        etiqueta="¿Qué vendes?"
         errores={errores.categoria_productos}
         opciones={CATEGORIAS_PRODUCTOS.map((valor) => ({ valor, etiqueta: valor }))}
       />
@@ -202,13 +202,13 @@ export function FormularioInscripcion() {
         >
           Acepto los{" "}
           <Link href="/terminos" target="_blank" className="font-medium underline underline-offset-2">
-            terminos del piloto
+            términos del piloto
           </Link>{" "}
-          y autorizo a Dolfs a leer el catalogo publico de mi tienda.
+          y autorizo a Dolfs a leer el catálogo público de mi tienda.
         </Casilla>
 
         <Casilla id={`${idFormulario}-reunion`} name="quiere_reunion">
-          Quiero una reunion de 15 minutos para que me lo expliquen.{" "}
+          Quiero una reunión de 15 minutos para que me lo expliquen.{" "}
           <span className="text-grafito">(opcional)</span>
         </Casilla>
       </div>
@@ -243,8 +243,8 @@ function Confirmacion({ resultado }: { resultado: Respuesta }) {
             abramos tu plataforma.
           </p>
           <p className="mt-3 leading-relaxed text-grafito">
-            Una cosa mas: vamos a revisar tu sitio igual. Si resulta que tu
-            tienda si corre en una de las tres que soportamos, te inscribimos sin
+            Una cosa más: vamos a revisar tu sitio igual. Si resulta que tu
+            tienda sí corre en una de las tres que soportamos, te inscribimos sin
             que tengas que hacer nada.
           </p>
         </>
@@ -252,8 +252,8 @@ function Confirmacion({ resultado }: { resultado: Respuesta }) {
         <>
           <h3 className="text-xl font-semibold tracking-tight">Listo, quedaste inscrito</h3>
           <p className="mt-3 leading-relaxed text-grafito">
-            Ya estamos leyendo el catalogo de tu tienda. Te escribimos al correo
-            que nos dejaste cuando este disponible dentro de los asistentes, o si
+            Ya estamos leyendo el catálogo de tu tienda. Te escribimos al correo
+            que nos dejaste cuando esté disponible dentro de los asistentes, o si
             nos topamos con algo que necesite tu ayuda.
           </p>
           {resultado.es_fundador && (
@@ -346,7 +346,7 @@ function Seleccion({
         className="mt-2 w-full rounded-lg border border-borde bg-papel px-3.5 py-2.5 text-base transition-colors focus:border-verde"
       >
         <option value="" disabled>
-          Elige una opcion
+          Elige una opción
         </option>
         {opciones.map((opcion) => (
           <option key={opcion.valor} value={opcion.valor}>
